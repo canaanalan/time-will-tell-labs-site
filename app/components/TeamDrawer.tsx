@@ -87,7 +87,7 @@ export default function TeamDrawer({ open, onClose }: TeamDrawerProps) {
               </h3>
 
               <p className="mt-6 text-sm leading-7 text-zinc-400 sm:text-base sm:leading-8">
-                QA Automation Engineer and systems oriented builder focused on
+                QA Engineer / SDET systems oriented builder focused on
                 operational quality, startup reliability, testing systems,
                 experimentation, and modern software workflows.
               </p>

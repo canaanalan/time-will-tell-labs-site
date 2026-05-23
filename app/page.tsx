@@ -48,6 +48,12 @@ export default function Home() {
         </div>
       </div>
 
+      <p className="mt-8 max-w-2xl text-center text-lg leading-8 text-zinc-400">
+  Your app probably works. Probably.
+  <br />
+  Don&apos;t lose sleep over production issues.
+</p>
+
       {!started && (
         <button
           onClick={() => setStarted(true)}

@@ -3,9 +3,11 @@
 import { useState } from "react";
 import { Hourglass } from "lucide-react";
 import { motion } from "framer-motion";
+import TeamDrawer from "./components/TeamDrawer";
 
 export default function Home() {
   const [started, setStarted] = useState(false);
+  const [teamOpen, setTeamOpen] = useState(false);
 
   return (
     <main className="min-h-screen bg-black text-zinc-200 flex flex-col items-center justify-center px-6 mt-6">
@@ -94,7 +96,7 @@ export default function Home() {
   </p>
 </section>
 
-<section className="mt-12 mb-40 flex flex-col items-center gap-5 text-sm tracking-[0.28em] text-zinc-500 uppercase">
+<section className="mt-12 mb-20 flex flex-col items-center gap-5 text-sm tracking-[0.28em] text-zinc-500 uppercase">
   <div>QA SYSTEMS & PROCESS</div>
   <div>UI & API AUTOMATION</div>
   <div>RELEASE CONFIDENCE</div>
@@ -102,6 +104,16 @@ export default function Home() {
   <div>SYSTEM WIDE VALIDATION</div>
   <div>RELIABILITY & OBSERVABILITY</div>
 </section>
+<button
+  onClick={() => setTeamOpen(true)}
+  className="mb-20 animate-subtle-pulse border border-zinc-500 bg-zinc-900/60 px-8 py-3 text-xs uppercase tracking-[0.28em] text-zinc-300 shadow-[0_0_35px_rgba(255,255,255,0.08)] transition duration-300 hover:-translate-y-1 hover:border-zinc-200 hover:text-zinc-100 hover:shadow-[0_0_50px_rgba(255,255,255,0.16)]"
+  >
+  Meet the team
+</button>
+<TeamDrawer
+  open={teamOpen}
+  onClose={() => setTeamOpen(false)}
+/>
     </main>
   );
 }

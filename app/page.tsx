@@ -1,13 +1,52 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Hourglass } from "lucide-react";
 import { motion } from "framer-motion";
+import CommunityModal from "./components/CommunityModal";
+import ContactModal from "./components/ContactModal";
 import TeamDrawer from "./components/TeamDrawer";
+
+const hourglassAnimationMs = 1800;
+type CtaTarget = "contact" | "community";
+const ctaButtonClass =
+  "border border-zinc-500 bg-transparent px-8 text-xs uppercase tracking-[0.28em] text-zinc-300 transition hover:border-zinc-200 hover:text-white disabled:cursor-wait disabled:border-zinc-800 disabled:text-zinc-600";
 
 export default function Home() {
   const [started, setStarted] = useState(false);
   const [teamOpen, setTeamOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
+  const [communityOpen, setCommunityOpen] = useState(false);
+  const [animationRun, setAnimationRun] = useState(0);
+  const [pendingCta, setPendingCta] = useState<CtaTarget | null>(null);
+  const modalTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (modalTimer.current) clearTimeout(modalTimer.current);
+    };
+  }, []);
+
+  const handleCtaClick = (target: CtaTarget) => {
+    if (modalTimer.current) clearTimeout(modalTimer.current);
+
+    setStarted(true);
+    setContactOpen(false);
+    setCommunityOpen(false);
+    setPendingCta(target);
+    setAnimationRun((run) => run + 1);
+
+    modalTimer.current = setTimeout(() => {
+      if (target === "contact") {
+        setContactOpen(true);
+      } else {
+        setCommunityOpen(true);
+      }
+
+      setPendingCta(null);
+      modalTimer.current = null;
+    }, hourglassAnimationMs);
+  };
 
   return (
     <main className="min-h-screen bg-black text-zinc-200 flex flex-col items-center justify-center px-6 mt-6">
@@ -28,8 +67,9 @@ export default function Home() {
       <div className="mt-14 animate-float p-8">
         <div className="animate-glow">
           <motion.div
+            key={animationRun}
             animate={
-              started
+              animationRun > 0
                 ? {
                     rotate: 720,
                     scale: 0.92,
@@ -38,7 +78,7 @@ export default function Home() {
                   }
                 : {}
             }
-            transition={{ duration: 2.4, ease: "easeInOut" }}
+            transition={{ duration: 1.8, ease: "easeInOut" }}
           >
             <Hourglass
               strokeWidth={1}
@@ -55,31 +95,53 @@ export default function Home() {
 </p>
 
       {!started && (
-        <button
-          onClick={() => setStarted(true)}
-          className="mt-12 border border-zinc-500 px-16 py-4 text-sm tracking-[0.35em] text-zinc-300 transition hover:border-zinc-200 hover:text-white"
-        >
-          GET IN TOUCH
-        </button>
+        <div className="mt-12 flex w-full max-w-xl flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center">
+          <button
+            type="button"
+            onClick={() => handleCtaClick("contact")}
+            disabled={pendingCta !== null}
+            className={`${ctaButtonClass} py-4`}
+          >
+            Get in touch
+          </button>
+
+          <button
+            type="button"
+            onClick={() => handleCtaClick("community")}
+            disabled={pendingCta !== null}
+            className={`${ctaButtonClass} py-4`}
+          >
+            Join the QA Community
+          </button>
+        </div>
       )}
 
-      {started && (
+      {started && !contactOpen && !communityOpen && (
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 2.1, duration: 1 }}
+          transition={{ delay: 1.45, duration: 0.8 }}
           className="mt-12 flex flex-col items-center"
         >
-          <h2 className="text-4xl md:text-4xl font-extralight tracking-[0.3em] text-zinc-100">
-            IT&apos;S TIME
-          </h2>
+          <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center sm:justify-center">
+            <button
+              type="button"
+              onClick={() => handleCtaClick("contact")}
+              disabled={pendingCta !== null}
+              className={`${ctaButtonClass} py-3`}
+            >
+              Get in touch
+            </button>
 
-          <a
-            href="mailto:hello@timewilltelllabs.com"
-            className="mt-6 text-zinc-400 hover:text-zinc-100"
-          >
-            hello@timewilltelllabs.com
-          </a>
+            <button
+              type="button"
+              onClick={() => handleCtaClick("community")}
+              disabled={pendingCta !== null}
+              className={`${ctaButtonClass} py-3`}
+            >
+              Join the QA Community
+            </button>
+          </div>
         </motion.div>
       )}
 
@@ -119,6 +181,14 @@ export default function Home() {
 <TeamDrawer
   open={teamOpen}
   onClose={() => setTeamOpen(false)}
+/>
+<ContactModal
+  open={contactOpen}
+  onClose={() => setContactOpen(false)}
+/>
+<CommunityModal
+  open={communityOpen}
+  onClose={() => setCommunityOpen(false)}
 />
     </main>
   );

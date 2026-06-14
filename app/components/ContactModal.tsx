@@ -26,6 +26,11 @@ const serviceOptions: ServiceOption[] = [
       "Testing and reliability support for AI products, including workflow validation, prompt/output checks, regression coverage, observability, and tools like LangSmith where useful.",
   },
   {
+    label: "Hire QA Talent",
+    description:
+      "We're building a small network of thoughtful QA, SDET, automation, reliability, and exploratory testing professionals across experience levels. If you need quality-minded people for a team, release, audit, or longer-term role, we can help find the right fit.",
+  },
+  {
     label: "General QA Request",
     description:
       "For automation, exploratory testing, release validation, CI/CD quality checks, or other software quality needs.",
@@ -114,7 +119,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
     <LabModal
       open={open}
       onClose={onClose}
-      eyebrow="Get in touch"
+      eyebrow="Quality Services"
       title="What needs testing?"
       titleId="contact-modal-title"
       maxWidth="max-w-3xl"

@@ -4,6 +4,7 @@ const recipientEmail = "hello@timewilltelllabs.com";
 const services = new Set([
   "QA Audit",
   "QA for AI Products",
+  "Hire QA Talent",
   "General QA Request",
 ]);
 

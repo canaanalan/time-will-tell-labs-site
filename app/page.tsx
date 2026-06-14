@@ -102,7 +102,7 @@ export default function Home() {
             disabled={pendingCta !== null}
             className={`${ctaButtonClass} py-4`}
           >
-            Get in touch
+            Quality Services
           </button>
 
           <button
@@ -129,9 +129,9 @@ export default function Home() {
               onClick={() => handleCtaClick("contact")}
               disabled={pendingCta !== null}
               className={`${ctaButtonClass} py-3`}
-            >
-              Get in touch
-            </button>
+              >
+                Quality Services
+              </button>
 
             <button
               type="button"

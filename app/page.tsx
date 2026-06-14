@@ -102,7 +102,7 @@ export default function Home() {
             disabled={pendingCta !== null}
             className={`${ctaButtonClass} py-4`}
           >
-            Our Services
+            Our Services (In Progress)
           </button>
 
           <button
@@ -130,7 +130,7 @@ export default function Home() {
               disabled={pendingCta !== null}
               className={`${ctaButtonClass} py-3`}
               >
-                Our Services
+                Our Services (In Progress)
               </button>
 
             <button

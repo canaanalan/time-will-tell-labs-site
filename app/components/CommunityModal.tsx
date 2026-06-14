@@ -88,7 +88,7 @@ export default function CommunityModal({
     <LabModal
       open={open}
       onClose={onClose}
-      eyebrow="QA Community"
+      eyebrow="Our QA Community"
       title="Early QA network"
       titleId="community-modal-title"
       maxWidth="max-w-xl"

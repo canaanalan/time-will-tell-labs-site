@@ -102,7 +102,7 @@ export default function Home() {
             disabled={pendingCta !== null}
             className={`${ctaButtonClass} py-4`}
           >
-            Quality Services
+            Our Services
           </button>
 
           <button
@@ -111,7 +111,7 @@ export default function Home() {
             disabled={pendingCta !== null}
             className={`${ctaButtonClass} py-4`}
           >
-            Join the QA Community
+            Join Our QA Community
           </button>
         </div>
       )}
@@ -130,7 +130,7 @@ export default function Home() {
               disabled={pendingCta !== null}
               className={`${ctaButtonClass} py-3`}
               >
-                Quality Services
+                Our Services
               </button>
 
             <button
@@ -139,7 +139,7 @@ export default function Home() {
               disabled={pendingCta !== null}
               className={`${ctaButtonClass} py-3`}
             >
-              Join the QA Community
+              Join Our QA Community
             </button>
           </div>
         </motion.div>
@@ -151,16 +151,22 @@ export default function Home() {
   </p>
 
   <p className="mt-8 text-lg leading-8 text-zinc-400">
-    Time Will Tell Labs is a systems oriented reliability and
-    quality project built around modern software operations,
-    testing, automation, experimentation, and startup engineering
-    culture.
+    Software has a way of telling the truth eventually.
   </p>
 
   <p className="mt-6 text-lg leading-8 text-zinc-400">
-    The focus is not just finding bugs, but understanding how
-    systems behave over time, where operational friction emerges,
-    and how teams build confidence in fast moving environments.
+    A release pipeline, a test suite, an AI workflow, a production
+    system—they all reveal themselves over time. Some earn confidence.
+    Some accumulate uncertainty. Most are more interesting than they
+    first appear.
+  </p>
+
+  <p className="mt-6 text-lg leading-8 text-zinc-400">
+    Time Will Tell Labs explores software quality, reliability, testing
+    systems, and modern engineering practices through that lens. Part
+    technical lab, part ongoing experiment, and hopefully a place where
+    thoughtful testers, engineers, and builders can learn from one
+    another along the way.
   </p>
 </section>
 
@@ -168,6 +174,8 @@ export default function Home() {
   <div>QA SYSTEMS & PROCESS</div>
   <div>UI & API AUTOMATION</div>
   <div>RELEASE CONFIDENCE</div>
+  <div>AI PRODUCT TESTING</div>
+  <div>QA TALENT NETWORK</div>
   <div>MONITORING</div>
   <div>SYSTEM WIDE VALIDATION</div>
   <div>RELIABILITY & OBSERVABILITY</div>

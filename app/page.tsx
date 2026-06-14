@@ -91,7 +91,9 @@ export default function Home() {
       <p className="mt-8 max-w-2xl text-center text-lg leading-8 text-zinc-400">
   Your app probably works. Probably.
   <br />
-  Don&apos;t lose sleep over production issues.
+  Quality doesn&apos;t sit on the side.
+  <br />
+  It&apos;s part of the system.
 </p>
 
       {!started && (
@@ -170,22 +172,22 @@ export default function Home() {
   </p>
 </section>
 
-<section className="mt-12 mb-20 flex flex-col items-center gap-5 text-sm tracking-[0.28em] text-zinc-500 uppercase">
-  <div>QA SYSTEMS & PROCESS</div>
-  <div>UI & API AUTOMATION</div>
-  <div>RELEASE CONFIDENCE</div>
-  <div>AI PRODUCT TESTING</div>
-  <div>QA TALENT NETWORK</div>
-  <div>MONITORING</div>
-  <div>SYSTEM WIDE VALIDATION</div>
-  <div>RELIABILITY & OBSERVABILITY</div>
-</section>
 <button
   onClick={() => setTeamOpen(true)}
-  className="mb-20 animate-subtle-pulse border border-zinc-500 bg-zinc-900/60 px-8 py-3 text-xs uppercase tracking-[0.28em] text-zinc-300 shadow-[0_0_35px_rgba(255,255,255,0.08)] transition duration-300 hover:-translate-y-1 hover:border-zinc-200 hover:text-zinc-100 hover:shadow-[0_0_50px_rgba(255,255,255,0.16)]"
+  className="mt-14 animate-subtle-pulse border border-zinc-500 bg-zinc-900/60 px-8 py-3 text-xs uppercase tracking-[0.28em] text-zinc-300 shadow-[0_0_35px_rgba(255,255,255,0.08)] transition duration-300 hover:-translate-y-1 hover:border-zinc-200 hover:text-zinc-100 hover:shadow-[0_0_50px_rgba(255,255,255,0.16)]"
   >
   Meet the team
 </button>
+
+<a
+  href="https://www.linkedin.com/company/time-will-tell-labs"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Time Will Tell Labs on LinkedIn"
+  className="mb-20 mt-8 text-xs uppercase tracking-[0.24em] text-zinc-500 transition hover:text-zinc-200"
+>
+  LinkedIn
+</a>
 <TeamDrawer
   open={teamOpen}
   onClose={() => setTeamOpen(false)}

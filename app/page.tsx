@@ -156,7 +156,7 @@ export default function Home() {
 
   <p className="mt-6 text-lg leading-8 text-zinc-400">
     A release pipeline, a test suite, an AI workflow, a production
-    system—they all reveal themselves over time. Some earn confidence.
+    system, they all reveal themselves over time. Some earn confidence.
     Some accumulate uncertainty. Most are more interesting than they
     first appear.
   </p>

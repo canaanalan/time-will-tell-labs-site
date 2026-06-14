@@ -10,8 +10,8 @@ import TeamDrawer from "./components/TeamDrawer";
 const hourglassAnimationMs = 1800;
 type CtaTarget = "contact" | "community";
 const ctaButtonClass =
-  "border border-zinc-500 bg-transparent px-8 text-xs uppercase tracking-[0.28em] text-zinc-300 transition hover:border-zinc-200 hover:text-white disabled:cursor-wait disabled:border-zinc-800 disabled:text-zinc-600";
-
+  "border border-zinc-500 bg-transparent px-8 text-xs uppercase tracking-[0.18em] whitespace-nowrap text-zinc-300 transition hover:border-zinc-200 hover:text-white disabled:cursor-wait disabled:border-zinc-800 disabled:text-zinc-600";
+  
 export default function Home() {
   const [started, setStarted] = useState(false);
   const [teamOpen, setTeamOpen] = useState(false);

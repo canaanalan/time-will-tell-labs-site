@@ -100,7 +100,7 @@ export default function Home() {
             type="button"
             onClick={() => handleCtaClick("contact")}
             disabled={pendingCta !== null}
-            className={`${ctaButtonClass} py-4`}
+            className={`${ctaButtonClass} py-4 whitespace-nowrap`}
           >
             Our Services (In Progress)
           </button>
@@ -109,7 +109,7 @@ export default function Home() {
             type="button"
             onClick={() => handleCtaClick("community")}
             disabled={pendingCta !== null}
-            className={`${ctaButtonClass} py-4`}
+            className={`${ctaButtonClass} py-4 whitespace-nowrap`}
           >
             Join Our QA Community
           </button>

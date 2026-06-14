@@ -49,18 +49,18 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-black text-zinc-200 flex flex-col items-center justify-center px-6 mt-6">
-      <h1 className="text-[9vw] md:text-[7vw] leading-[0.88] tracking-[0.18em] font-thin text-center text-zinc-300 uppercase select-none">
-  <span className="block">TIME WILL TELL</span>
+    <main className="min-h-screen bg-black text-zinc-200 flex flex-col items-center justify-center px-6 pb-12 pt-16 md:pt-6">
+      <h1 className="w-full text-center text-[clamp(2.3rem,10.5vw,8rem)] font-thin uppercase leading-[0.88] tracking-[0.08em] text-zinc-300 select-none sm:tracking-[0.14em] md:text-[7vw] md:tracking-[0.18em]">
+  <span className="block whitespace-nowrap">TIME WILL TELL</span>
 
   <div className="mt-3 flex items-center justify-center gap-6">
-    <div className="h-px w-16 bg-zinc-500" />
+    <div className="h-px w-10 bg-zinc-500 sm:w-16" />
 
-    <span className="text-[0.9em] tracking-[0.28em]">
+    <span className="whitespace-nowrap text-[0.9em] tracking-[0.2em] sm:tracking-[0.28em]">
       LABS
     </span>
 
-    <div className="h-px w-16 bg-zinc-500" />
+    <div className="h-px w-10 bg-zinc-500 sm:w-16" />
   </div>
 </h1>
 

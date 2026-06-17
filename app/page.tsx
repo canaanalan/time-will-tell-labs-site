@@ -13,7 +13,9 @@ type CtaTarget = "contact" | "community";
 const ctaButtonClass =
   "border border-zinc-500 bg-transparent px-8 text-xs uppercase tracking-[0.18em] whitespace-nowrap text-zinc-300 transition hover:border-zinc-200 hover:text-white disabled:cursor-wait disabled:border-zinc-800 disabled:text-zinc-600";
 const secondaryButtonClass =
-  "animate-subtle-pulse border border-zinc-500 bg-zinc-900/60 px-8 py-3 text-xs uppercase tracking-[0.28em] text-zinc-300 shadow-[0_0_35px_rgba(255,255,255,0.08)] transition duration-300 hover:-translate-y-1 hover:border-zinc-200 hover:text-zinc-100 hover:shadow-[0_0_50px_rgba(255,255,255,0.16)]";
+  "border border-zinc-500 bg-zinc-900/60 px-8 py-3 text-xs uppercase tracking-[0.28em] text-zinc-300 shadow-[0_0_35px_rgba(255,255,255,0.08)] transition duration-300 hover:-translate-y-1 hover:border-zinc-200 hover:text-zinc-100 hover:shadow-[0_0_50px_rgba(255,255,255,0.16)]";
+const quietButtonClass =
+  "border border-transparent bg-transparent px-8 py-3 text-xs uppercase tracking-[0.28em] text-zinc-400 transition duration-300 hover:-translate-y-1 hover:text-zinc-200";
   
 export default function Home() {
   const [started, setStarted] = useState(false);
@@ -187,7 +189,7 @@ export default function Home() {
 
   <button
     onClick={() => setLabOpen(true)}
-    className={secondaryButtonClass}
+    className={quietButtonClass}
   >
     Lab demo
   </button>

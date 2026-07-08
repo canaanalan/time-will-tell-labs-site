@@ -153,22 +153,8 @@ export default function Home() {
   </p>
 
   <p className="mt-8 text-lg leading-8 text-zinc-400">
-    Software has a way of telling the truth eventually.
-  </p>
-
-  <p className="mt-6 text-lg leading-8 text-zinc-400">
-    A release pipeline, a test suite, an AI workflow, a production
-    system, they all reveal themselves over time. Some earn confidence.
-    Some accumulate uncertainty. Most are more interesting than they
-    first appear.
-  </p>
-
-      <p className="mt-6 text-lg leading-8 text-zinc-400">
-    Time Will Tell Labs explores software quality, reliability, testing
-    systems, and modern engineering practices through that lens. Part
-    technical lab, part ongoing experiment, and hopefully a place where
-    thoughtful testers, engineers, and builders can learn from one
-    another along the way.
+    Time Will Tell Labs is a small technical lab exploring software quality,
+    reliability, testing systems, and modern engineering practices.
   </p>
 
   <button

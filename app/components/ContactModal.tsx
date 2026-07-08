@@ -120,7 +120,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
       open={open}
       onClose={onClose}
       eyebrow="Our Services"
-      title="What needs testing?"
+      title="What needs testing? (Coming Soon)"
       titleId="contact-modal-title"
       maxWidth="max-w-3xl"
     >

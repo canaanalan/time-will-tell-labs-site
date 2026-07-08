@@ -92,6 +92,7 @@ export default function CommunityModal({
       title="Early QA network"
       titleId="community-modal-title"
       maxWidth="max-w-xl"
+      itsTime={true}
     >
               <p className="mt-6 text-sm leading-7 text-zinc-400 sm:text-base sm:leading-8">
                 A small early community for QA, SDET, automation, reliability,

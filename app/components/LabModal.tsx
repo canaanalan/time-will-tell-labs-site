@@ -12,6 +12,7 @@ type LabModalProps = {
   titleId: string;
   children: ReactNode;
   maxWidth?: string;
+  itsTime?: boolean;
 };
 
 export default function LabModal({
@@ -22,6 +23,7 @@ export default function LabModal({
   titleId,
   children,
   maxWidth = "max-w-2xl",
+  itsTime = false,
 }: LabModalProps) {
   useEffect(() => {
     if (!open) return;
@@ -77,9 +79,11 @@ export default function LabModal({
             </div>
 
             <div className="min-h-0 flex-1 overflow-y-auto px-5 py-6 sm:px-6">
-              <p className="mb-7 text-center text-3xl font-extralight uppercase tracking-[0.3em] text-zinc-100 sm:text-4xl">
-                IT&apos;S TIME...
-              </p>
+              {itsTime && (
+                <p className="mb-7 text-center text-3xl font-extralight uppercase tracking-[0.3em] text-zinc-100 sm:text-4xl">
+                  IT&apos;S TIME...
+                </p>
+              )}
 
               <h3
                 id={titleId}

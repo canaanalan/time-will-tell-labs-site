@@ -18,7 +18,6 @@ const quietButtonClass =
   "border border-transparent bg-transparent px-8 py-3 text-xs uppercase tracking-[0.28em] text-zinc-400 transition duration-300 hover:-translate-y-1 hover:text-zinc-200";
   
 export default function Home() {
-  const [started, setStarted] = useState(false);
   const [teamOpen, setTeamOpen] = useState(false);
   const [labOpen, setLabOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
@@ -26,6 +25,8 @@ export default function Home() {
   const [animationRun, setAnimationRun] = useState(0);
   const [pendingCta, setPendingCta] = useState<CtaTarget | null>(null);
   const modalTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const modalBackdropLocked =
+    pendingCta !== null || contactOpen || communityOpen;
 
   useEffect(() => {
     return () => {
@@ -33,10 +34,34 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    if (!modalBackdropLocked) return;
+
+    const scrollY = window.scrollY;
+    const previousBodyStyles = {
+      overflow: document.body.style.overflow,
+      position: document.body.style.position,
+      top: document.body.style.top,
+      width: document.body.style.width,
+    };
+
+    document.body.style.overflow = "hidden";
+    document.body.style.position = "fixed";
+    document.body.style.top = `-${scrollY}px`;
+    document.body.style.width = "100%";
+
+    return () => {
+      document.body.style.overflow = previousBodyStyles.overflow;
+      document.body.style.position = previousBodyStyles.position;
+      document.body.style.top = previousBodyStyles.top;
+      document.body.style.width = previousBodyStyles.width;
+      window.scrollTo(0, scrollY);
+    };
+  }, [modalBackdropLocked]);
+
   const handleCtaClick = (target: CtaTarget) => {
     if (modalTimer.current) clearTimeout(modalTimer.current);
 
-    setStarted(true);
     setContactOpen(false);
     setCommunityOpen(false);
     setPendingCta(target);
@@ -102,56 +127,27 @@ export default function Home() {
   It&apos;s part of the system.
 </p>
 
-      {!started && (
-        <div className="mt-12 flex w-full max-w-xl flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center">
-          <button
-            type="button"
-            onClick={() => handleCtaClick("contact")}
-            disabled={pendingCta !== null}
-            className={`${ctaButtonClass} py-4 whitespace-nowrap`}
-          >
-            Our Services (In Progress)
-          </button>
-
-          <button
-            type="button"
-            onClick={() => handleCtaClick("community")}
-            disabled={pendingCta !== null}
-            className={`${ctaButtonClass} py-4 whitespace-nowrap`}
-          >
-            Join Our QA Community
-          </button>
-        </div>
-      )}
-
-      {started && !contactOpen && !communityOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.45, duration: 0.8 }}
-          className="mt-12 flex flex-col items-center"
+      <div
+        className="mt-12 flex w-full max-w-xl flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center"
+      >
+        <button
+          type="button"
+          onClick={() => handleCtaClick("contact")}
+          disabled={pendingCta !== null}
+          className={`${ctaButtonClass} py-4 whitespace-nowrap`}
         >
-          <div className="flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center sm:justify-center">
-            <button
-              type="button"
-              onClick={() => handleCtaClick("contact")}
-              disabled={pendingCta !== null}
-              className={`${ctaButtonClass} py-3 whitespace-nowrap`}
-              >
-                Our Services (In Progress)
-              </button>
+          Our Services (In Progress)
+        </button>
 
-            <button
-              type="button"
-              onClick={() => handleCtaClick("community")}
-              disabled={pendingCta !== null}
-              className={`${ctaButtonClass} py-3 whitespace-nowrap`}
-            >
-              Join Our QA Community
-            </button>
-          </div>
-        </motion.div>
-      )}
+        <button
+          type="button"
+          onClick={() => handleCtaClick("community")}
+          disabled={pendingCta !== null}
+          className={`${ctaButtonClass} py-4 whitespace-nowrap`}
+        >
+          Join Our QA Community
+        </button>
+      </div>
 
 <section className="mt-20 max-w-3xl text-center">
   <p className="text-sm tracking-[0.25em] text-zinc-500 uppercase">

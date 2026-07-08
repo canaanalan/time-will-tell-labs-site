@@ -1,7 +1,7 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { useMemo, useState } from "react";
 import {
   Activity,
   ArrowLeft,
@@ -175,23 +175,28 @@ const statusClass: Record<RunStatus, string> = {
   FLAKY: "border-amber-400/30 bg-amber-400/10 text-amber-300",
 };
 
+const showcaseScreenshots = [
+  {
+    title: "Failures, attempts, artifacts, and slow tests",
+    eyebrow: "Failure workflow",
+    image: "/failuresAndFlakesSectionExample.png",
+    alt: "Playwright Cloud Lite failures and flaky candidates section with attempts, artifact links, and slowest tests sidebar",
+    description:
+      "Failed tests are grouped with retry history and artifact links so the next action is obvious: inspect the error, compare attempts, open the trace, or review the screenshot.",
+  },
+  {
+    title: "Flaky signal from retry behavior",
+    eyebrow: "Reliability signal",
+    image: "/flakyTestExample.png",
+    alt: "Playwright Cloud Lite flaky test example showing one failed attempt followed by a passed retry and a flake screenshot",
+    description:
+      "A passed retry is not treated as invisible success. The UI keeps the failed attempt visible so flaky behavior can be reviewed before it quietly chips away at release confidence.",
+  },
+];
+
 export default function PlaywrightCloudLiteDemo() {
-  const [selectedRunId, setSelectedRunId] = useState(runs[0].id);
-  const selectedRun = runs.find((run) => run.id === selectedRunId) ?? runs[0];
-  const priorityTest = selectedRun.tests[0];
-  const totals = useMemo(
-    () => ({
-      runs: runs.length,
-      failed: runs.filter((run) => run.status === "FAILED").length,
-      retries: runs.reduce((total, run) => total + run.retries, 0),
-      flaky: runs.reduce(
-        (total, run) =>
-          total + run.tests.filter((test) => test.status === "FLAKY").length,
-        0,
-      ),
-    }),
-    [],
-  );
+  const featuredRun = runs[0];
+  const priorityTest = featuredRun.tests[0];
 
   return (
     <main className="min-h-screen bg-[#05070d] px-5 py-6 text-zinc-100 md:px-8">
@@ -205,10 +210,7 @@ export default function PlaywrightCloudLiteDemo() {
               <ArrowLeft className="h-3.5 w-3.5" />
               Time Will Tell Labs
             </Link>
-            <p className="text-xs uppercase tracking-[0.24em] text-zinc-500">
-              Static product demo
-            </p>
-            <h1 className="mt-3 text-4xl font-semibold tracking-tight text-zinc-100 md:text-6xl">
+            <h1 className="text-4xl font-semibold tracking-tight text-zinc-100 md:text-6xl">
               Playwright Cloud Lite
             </h1>
             <p className="mt-4 max-w-2xl text-sm leading-6 text-zinc-400">
@@ -226,51 +228,17 @@ export default function PlaywrightCloudLiteDemo() {
           </a>
         </header>
 
-        <section className="mb-6 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          <Metric label="Runs" value={totals.runs} />
-          <Metric label="Failed runs" value={totals.failed} />
-          <Metric label="Retries" value={totals.retries} />
-          <Metric label="Flaky signals" value={totals.flaky} />
-        </section>
-
-        <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
-          <section className="overflow-hidden rounded-lg border border-white/10 bg-[#080b15]">
-            <div className="border-b border-white/10 px-5 py-4">
-              <h2 className="text-lg font-semibold">Run history</h2>
-            </div>
-            <div className="divide-y divide-white/10">
-              {runs.map((run) => (
-                <button
-                  key={run.id}
-                  type="button"
-                  onClick={() => setSelectedRunId(run.id)}
-                  className={`grid w-full gap-4 px-5 py-4 text-left transition hover:bg-white/[0.04] focus:outline-none focus-visible:bg-white/[0.06] focus-visible:ring-2 focus-visible:ring-sky-300/40 md:grid-cols-[minmax(180px,1.4fr)_100px_minmax(120px,1fr)_minmax(180px,1.2fr)_80px] md:items-center ${
-                    selectedRunId === run.id ? "bg-white/[0.05]" : ""
-                  }`}
-                >
-                  <div className="min-w-0">
-                    <p className="truncate font-medium text-zinc-100">
-                      {run.project}
-                    </p>
-                    <p className="mt-1 text-xs text-zinc-500">
-                      {run.source} · commit {run.commit}
-                    </p>
-                  </div>
-                  <StatusBadge status={run.status} />
-                  <div className="flex items-center gap-2 text-xs text-zinc-400">
-                    <GitBranch className="h-3.5 w-3.5 text-zinc-600" />
-                    <span className="truncate">{run.branch}</span>
-                  </div>
-                  <div className="flex flex-wrap gap-1.5 text-xs">
-                    <ResultPill tone="pass" value={run.passed} label="passed" />
-                    <ResultPill tone="fail" value={run.failed} label="failed" />
-                    <ResultPill tone="skip" value={run.skipped} label="skipped" />
-                  </div>
-                  <p className="text-sm text-zinc-400">{run.duration}</p>
-                </button>
-              ))}
-            </div>
-          </section>
+        <section className="mb-10 grid gap-6 lg:grid-cols-[minmax(0,1fr)_420px]">
+          <div className="overflow-hidden rounded-lg border border-white/10 bg-[#080b15] p-4">
+            <Image
+              src="/RunReportExample.png"
+              alt="Playwright Cloud Lite run report showing run metadata, counts, debug priority, and recommended triage path"
+              width={2552}
+              height={1308}
+              sizes="(min-width: 1024px) 760px, 100vw"
+              className="h-auto w-full rounded-md border border-white/10"
+            />
+          </div>
 
           <aside className="space-y-4">
             <section className="rounded-lg border border-white/10 bg-[#0b1020] p-5">
@@ -279,10 +247,8 @@ export default function PlaywrightCloudLiteDemo() {
                   <p className="text-xs uppercase tracking-[0.22em] text-zinc-500">
                     Debug priority
                   </p>
-                  <h2 className="mt-2 text-xl font-semibold">
-                    {priorityTest
-                      ? "Start with the first failing test and its artifacts."
-                      : "No immediate debugging needed for this run."}
+                  <h2 className="mt-3 text-2xl font-semibold leading-tight text-zinc-100">
+                    Start with the first failing test and its artifacts.
                   </h2>
                 </div>
                 <Activity className="h-5 w-5 text-sky-300" />
@@ -291,60 +257,78 @@ export default function PlaywrightCloudLiteDemo() {
 
             <section className="rounded-lg border border-white/10 bg-[#0b1020] p-5">
               <div className="flex items-center justify-between gap-3">
-                <h2 className="text-lg font-semibold">{selectedRun.project}</h2>
-                <StatusBadge status={selectedRun.status} />
+                <h2 className="text-lg font-semibold">{featuredRun.project}</h2>
+                <StatusBadge status={featuredRun.status} />
               </div>
               <div className="mt-4 grid grid-cols-2 gap-3 text-sm">
-                <Context icon={<Clock3 />} label="Duration" value={selectedRun.duration} />
-                <Context icon={<RotateCcw />} label="Retries" value={selectedRun.retries.toString()} />
-                <Context icon={<BadgeCheck />} label="Source" value={selectedRun.source} />
-                <Context icon={<GitBranch />} label="Branch" value={selectedRun.branch} />
+                <Context icon={<Clock3 />} label="Duration" value={featuredRun.duration} />
+                <Context icon={<RotateCcw />} label="Retries" value={featuredRun.retries.toString()} />
+                <Context icon={<BadgeCheck />} label="Source" value={featuredRun.source} />
+                <Context icon={<GitBranch />} label="Branch" value={featuredRun.branch} />
               </div>
             </section>
-
-            <section className="rounded-lg border border-white/10 bg-[#0b1020] p-5">
-              <h2 className="text-lg font-semibold">Failures and artifacts</h2>
-              {!priorityTest ? (
-                <p className="mt-3 text-sm leading-6 text-zinc-500">
-                  This run is clean. In the full app, passed runs stay available
-                  for duration and history comparison.
-                </p>
-              ) : (
-                <div className="mt-4 space-y-4">
-                  <div>
-                    <p className="font-medium text-zinc-100">{priorityTest.title}</p>
-                    <p className="mt-1 text-xs text-zinc-500">
-                      {priorityTest.file} · {priorityTest.browser} ·{" "}
-                      {priorityTest.duration}
-                    </p>
-                    {priorityTest.error ? (
-                      <pre className="mt-3 max-h-36 overflow-auto whitespace-pre-wrap rounded-md border border-rose-400/20 bg-rose-400/10 p-3 text-xs leading-5 text-rose-100">
-                        {priorityTest.error}
-                      </pre>
-                    ) : null}
-                  </div>
-
-                  <div className="space-y-2">
-                    {priorityTest.artifacts.map((artifact) => (
-                      <ArtifactCard key={artifact.filename} artifact={artifact} />
-                    ))}
-                  </div>
-                </div>
-              )}
-            </section>
           </aside>
-        </div>
+        </section>
+
+        {priorityTest ? (
+          <section className="mb-10 grid gap-6 lg:grid-cols-[420px_minmax(0,1fr)] lg:items-start">
+            <div>
+              <h2 className="text-3xl font-semibold tracking-tight text-zinc-100">
+                QA tooling beyond writing tests
+              </h2>
+              <p className="mt-4 text-sm leading-7 text-zinc-400">
+                This project is about the layer around the tests: how failures
+                get prioritized, how retries become signals, and how artifacts
+                help turn CI noise into something a team can act on.
+              </p>
+            </div>
+
+            <FailureArtifactPanel test={priorityTest} />
+          </section>
+        ) : null}
+
+        <ShowcaseSection />
+
       </div>
     </main>
   );
 }
 
-function Metric({ label, value }: { label: string; value: number }) {
+function ShowcaseSection() {
   return (
-    <div className="rounded-lg border border-white/10 bg-[#080b15] p-4">
-      <p className="text-sm text-zinc-500">{label}</p>
-      <p className="mt-2 text-3xl font-semibold">{value}</p>
-    </div>
+    <section className="border-t border-white/10 pt-10">
+      <div className="space-y-8">
+        {showcaseScreenshots.map((screenshot, index) => (
+          <article
+            key={screenshot.image}
+            className="grid gap-5 rounded-lg border border-white/10 bg-[#080b15] p-4 lg:grid-cols-[360px_minmax(0,1.35fr)] lg:items-center"
+          >
+            <div>
+              <p className="text-xs uppercase tracking-[0.22em] text-sky-300/80">
+                {screenshot.eyebrow}
+              </p>
+              <h3 className="mt-3 text-2xl font-semibold tracking-tight text-zinc-100">
+                {screenshot.title}
+              </h3>
+              <p className="mt-4 text-sm leading-7 text-zinc-400">
+                {screenshot.description}
+              </p>
+            </div>
+
+            <div className="overflow-hidden rounded-md border border-white/10 bg-black/40">
+              <Image
+                src={screenshot.image}
+                alt={screenshot.alt}
+                width={index === 1 ? 1776 : 2552}
+                height={index === 1 ? 948 : 1580}
+                sizes="(min-width: 1024px) 760px, 100vw"
+                className="h-auto w-full"
+              />
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
   );
 }
 
@@ -354,28 +338,6 @@ function StatusBadge({ status }: { status: RunStatus }) {
       className={`inline-flex w-fit rounded-md border px-2 py-1 text-xs font-semibold ${statusClass[status]}`}
     >
       {status}
-    </span>
-  );
-}
-
-function ResultPill({
-  tone,
-  value,
-  label,
-}: {
-  tone: "pass" | "fail" | "skip";
-  value: number;
-  label: string;
-}) {
-  const classes = {
-    pass: "bg-emerald-400/10 text-emerald-300 ring-emerald-400/20",
-    fail: "bg-rose-400/10 text-rose-300 ring-rose-400/20",
-    skip: "bg-zinc-800 text-zinc-300 ring-zinc-700",
-  };
-
-  return (
-    <span className={`rounded-md px-2 py-1 ring-1 ${classes[tone]}`}>
-      {value} {label}
     </span>
   );
 }
@@ -395,6 +357,33 @@ function Context({
       <p className="text-xs text-zinc-500">{label}</p>
       <p className="mt-1 truncate text-sm text-zinc-200">{value}</p>
     </div>
+  );
+}
+
+function FailureArtifactPanel({ test }: { test: TestCase }) {
+  return (
+    <article className="rounded-lg border border-white/10 bg-[#0b1020] p-5">
+      <h2 className="text-2xl font-semibold text-zinc-100">
+        Failures and artifacts
+      </h2>
+      <div className="mt-5">
+        <p className="text-lg font-medium text-zinc-100">{test.title}</p>
+        <p className="mt-1 text-xs text-zinc-500">
+          {test.file} · {test.browser} · {test.duration}
+        </p>
+        {test.error ? (
+          <pre className="mt-4 whitespace-pre-wrap rounded-md border border-rose-400/20 bg-rose-400/10 p-4 text-sm leading-6 text-rose-100">
+            {test.error}
+          </pre>
+        ) : null}
+      </div>
+
+      <div className="mt-5 space-y-3">
+        {test.artifacts.map((artifact) => (
+          <ArtifactCard key={artifact.filename} artifact={artifact} />
+        ))}
+      </div>
+    </article>
   );
 }
 

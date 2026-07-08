@@ -5,7 +5,7 @@ import { Hourglass } from "lucide-react";
 import { motion } from "framer-motion";
 import CommunityModal from "./components/CommunityModal";
 import ContactModal from "./components/ContactModal";
-import ProjectDrawer from "./components/ProjectDrawer";
+import ProjectModal from "./components/ProjectModal";
 import TeamDrawer from "./components/TeamDrawer";
 
 const hourglassAnimationMs = 1800;
@@ -14,8 +14,6 @@ const ctaButtonClass =
   "border border-zinc-500 bg-transparent px-8 text-xs uppercase tracking-[0.18em] whitespace-nowrap text-zinc-300 transition hover:border-zinc-200 hover:text-white disabled:cursor-wait disabled:border-zinc-800 disabled:text-zinc-600";
 const secondaryButtonClass =
   "border border-zinc-500 bg-zinc-900/60 px-8 py-3 text-xs uppercase tracking-[0.28em] text-zinc-300 shadow-[0_0_35px_rgba(255,255,255,0.08)] transition duration-300 hover:-translate-y-1 hover:border-zinc-200 hover:text-zinc-100 hover:shadow-[0_0_50px_rgba(255,255,255,0.16)]";
-const quietButtonClass =
-  "border border-transparent bg-transparent px-8 py-3 text-xs uppercase tracking-[0.28em] text-zinc-400 transition duration-300 hover:-translate-y-1 hover:text-zinc-200";
   
 export default function Home() {
   const [teamOpen, setTeamOpen] = useState(false);
@@ -173,6 +171,23 @@ export default function Home() {
     another along the way.
   </p>
 
+  <button
+    type="button"
+    onClick={() => setLabOpen(true)}
+    className="mx-auto mt-12 block w-full max-w-xl border-y border-zinc-800 px-4 py-6 text-center transition hover:border-zinc-500"
+  >
+    <span className="block text-xs uppercase tracking-[0.28em] text-zinc-500">
+      Current lab
+    </span>
+    <span className="mt-3 block text-lg font-light tracking-[0.12em] text-zinc-200">
+      Playwright Cloud Lite
+    </span>
+    <span className="mx-auto mt-3 block max-w-md text-sm leading-6 text-zinc-500">
+      A small test observability project for failures, retries, flaky signals,
+      and debugging artifacts.
+    </span>
+  </button>
+
 </section>
 
 <div className="mt-14 flex w-full max-w-56 flex-col items-stretch gap-3">
@@ -181,13 +196,6 @@ export default function Home() {
     className={secondaryButtonClass}
     >
     Meet the team
-  </button>
-
-  <button
-    onClick={() => setLabOpen(true)}
-    className={quietButtonClass}
-  >
-    Lab demo
   </button>
 </div>
 
@@ -204,7 +212,7 @@ export default function Home() {
   open={teamOpen}
   onClose={() => setTeamOpen(false)}
 />
-<ProjectDrawer
+<ProjectModal
   open={labOpen}
   onClose={() => setLabOpen(false)}
 />

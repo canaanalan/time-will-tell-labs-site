@@ -140,28 +140,11 @@ export default function Home() {
     reliability, testing systems, and modern engineering practices.
   </p>
 
-  <button
-    type="button"
-    onClick={() => setLabOpen(true)}
-    className="mx-auto mt-12 block w-full max-w-xl border-y border-zinc-800 px-4 py-6 text-center transition hover:border-zinc-500"
-  >
-    <span className="block text-xs uppercase tracking-[0.28em] text-zinc-500">
-      Current lab
-    </span>
-    <span className="mt-3 block text-lg font-light tracking-[0.12em] text-zinc-200">
-      Playwright Cloud Lite
-    </span>
-    <span className="mx-auto mt-3 block max-w-md text-sm leading-6 text-zinc-500">
-      A small test observability project for failures, retries, flaky signals,
-      and debugging artifacts.
-    </span>
-  </button>
-
 </section>
 
 <section className="mt-20 w-full max-w-3xl text-center">
   <p className="text-sm uppercase tracking-[0.25em] text-zinc-500">
-    Client work
+    Selected client work
   </p>
 
   <button
@@ -186,6 +169,26 @@ export default function Home() {
       <span className="shrink-0 text-xs uppercase tracking-[0.2em] text-zinc-500 transition group-hover:text-zinc-200">
         View project →
       </span>
+    </span>
+  </button>
+</section>
+
+<section className="mt-20 w-full max-w-3xl text-center">
+  <p className="text-sm uppercase tracking-[0.25em] text-zinc-500">
+    From the lab
+  </p>
+
+  <button
+    type="button"
+    onClick={() => setLabOpen(true)}
+    className="mx-auto mt-8 block w-full max-w-xl border-y border-zinc-800 px-4 py-6 text-center transition hover:border-zinc-500"
+  >
+    <span className="block text-lg font-light tracking-[0.12em] text-zinc-200">
+      Playwright Cloud Lite
+    </span>
+    <span className="mx-auto mt-3 block max-w-md text-sm leading-6 text-zinc-500">
+      A small test observability project for failures, retries, flaky signals,
+      and debugging artifacts.
     </span>
   </button>
 </section>

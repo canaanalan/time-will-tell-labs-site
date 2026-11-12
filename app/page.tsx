@@ -5,6 +5,7 @@ import { Hourglass } from "lucide-react";
 import { motion } from "framer-motion";
 import CommunityModal from "./components/CommunityModal";
 import ContactModal from "./components/ContactModal";
+import KonveioProjectModal from "./components/KonveioProjectModal";
 import ProjectModal from "./components/ProjectModal";
 import TeamDrawer from "./components/TeamDrawer";
 
@@ -18,6 +19,7 @@ const secondaryButtonClass =
 export default function Home() {
   const [teamOpen, setTeamOpen] = useState(false);
   const [labOpen, setLabOpen] = useState(false);
+  const [konveioOpen, setKonveioOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
   const [communityOpen, setCommunityOpen] = useState(false);
   const [animationRun, setAnimationRun] = useState(0);
@@ -143,7 +145,7 @@ export default function Home() {
           disabled={pendingCta !== null}
           className={`${ctaButtonClass} py-4 whitespace-nowrap`}
         >
-          Join Our QA Community
+          Join Our Community
         </button>
       </div>
 
@@ -176,6 +178,37 @@ export default function Home() {
 
 </section>
 
+<section className="mt-20 w-full max-w-3xl text-center">
+  <p className="text-sm uppercase tracking-[0.25em] text-zinc-500">
+    Client work
+  </p>
+
+  <button
+    type="button"
+    onClick={() => setKonveioOpen(true)}
+    className="group mt-8 w-full border border-zinc-800 bg-zinc-950/40 px-6 py-7 text-left transition duration-300 hover:-translate-y-1 hover:border-zinc-500 hover:bg-zinc-950 sm:px-8 sm:py-8"
+  >
+    <span className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
+      <span>
+        <span className="block text-xs uppercase tracking-[0.28em] text-sky-300/70">
+          QA automation · Reliability
+        </span>
+        <span className="mt-3 block text-2xl font-extralight tracking-[0.12em] text-zinc-100 sm:text-3xl">
+          Konveio
+        </span>
+        <span className="mt-4 block max-w-xl text-sm leading-7 text-zinc-500">
+          End-to-end coverage for interactive documents, role-based
+          permissions, embedded access, commenting, voting, and account
+          workflows.
+        </span>
+      </span>
+      <span className="shrink-0 text-xs uppercase tracking-[0.2em] text-zinc-500 transition group-hover:text-zinc-200">
+        View project →
+      </span>
+    </span>
+  </button>
+</section>
+
 <div className="mt-14 flex w-full max-w-56 flex-col items-stretch gap-3">
   <button
     onClick={() => setTeamOpen(true)}
@@ -201,6 +234,10 @@ export default function Home() {
 <ProjectModal
   open={labOpen}
   onClose={() => setLabOpen(false)}
+/>
+<KonveioProjectModal
+  open={konveioOpen}
+  onClose={() => setKonveioOpen(false)}
 />
 <ContactModal
   open={contactOpen}

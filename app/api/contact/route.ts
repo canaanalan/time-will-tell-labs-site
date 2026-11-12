@@ -2,8 +2,8 @@ import { NextResponse } from "next/server";
 
 const recipientEmail = "hello@timewilltelllabs.com";
 const services = new Set([
-  "QA Audit",
-  "QA for AI Products",
+  "Test Automation & Infrastructure",
+  "AI Reliability Engineering",
   "Hire QA Talent",
   "General QA Request",
 ]);

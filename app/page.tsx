@@ -1,13 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Hourglass } from "lucide-react";
-import { motion } from "framer-motion";
 import CommunityModal from "./components/CommunityModal";
 import ContactModal from "./components/ContactModal";
 import KonveioProjectModal from "./components/KonveioProjectModal";
 import ProjectModal from "./components/ProjectModal";
 import TeamDrawer from "./components/TeamDrawer";
+import ThreeHourglass from "./components/ThreeHourglass";
 
 const hourglassAnimationMs = 1800;
 type CtaTarget = "contact" | "community";
@@ -81,7 +80,7 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-black text-zinc-200 flex flex-col items-center justify-center px-6 pb-12 pt-16 md:pt-6">
-      <h1 className="w-full text-center text-[clamp(2.3rem,10.5vw,8rem)] font-thin uppercase leading-[0.88] tracking-[0.08em] text-zinc-300 select-none sm:tracking-[0.14em] md:text-[7vw] md:tracking-[0.18em]">
+      <h1 className="w-full text-center text-[clamp(2.15rem,9vw,6.75rem)] font-thin uppercase leading-[0.88] tracking-[0.08em] text-zinc-300 select-none sm:tracking-[0.14em] md:text-[6vw] md:tracking-[0.18em]">
   <span className="block whitespace-nowrap">TIME WILL TELL</span>
 
   <div className="mt-3 flex items-center justify-center gap-6">
@@ -95,27 +94,9 @@ export default function Home() {
   </div>
 </h1>
 
-      <div className="mt-14 animate-float p-8">
-        <div className="animate-glow">
-          <motion.div
-            key={animationRun}
-            animate={
-              animationRun > 0
-                ? {
-                    rotate: 720,
-                    scale: 0.92,
-                    opacity: 0.75,
-                    filter: ["blur(0px)", "blur(2px)", "blur(0px)"],
-                  }
-                : {}
-            }
-            transition={{ duration: 1.8, ease: "easeInOut" }}
-          >
-            <Hourglass
-              strokeWidth={1}
-              className="h-52 w-52 text-zinc-300"
-            />
-          </motion.div>
+      <div className="mt-7 flex h-72 w-full items-center justify-center sm:mt-9 sm:h-80">
+        <div className="animate-float animate-glow">
+          <ThreeHourglass flipSignal={animationRun} />
         </div>
       </div>
 
@@ -136,7 +117,7 @@ export default function Home() {
           disabled={pendingCta !== null}
           className={`${ctaButtonClass} py-4 whitespace-nowrap`}
         >
-          Our Services (In Progress)
+          Our Services
         </button>
 
         <button

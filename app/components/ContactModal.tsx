@@ -12,21 +12,23 @@ type ContactModalProps = {
 type ServiceOption = {
   label: string;
   description: string;
+  comingSoon?: boolean;
 };
 
 const serviceOptions: ServiceOption[] = [
   {
-    label: "QA Audit",
+    label: "Test Automation & Infrastructure",
     description:
-      "A focused 4-week audit to assess release pipelines, identify reliability gaps, build smoke coverage, and recommend practical quality improvements.",
+      "Build the automation, CI quality gates, smoke coverage, and test infrastructure your team needs. This can begin with a focused audit to identify the highest-value reliability gaps.",
   },
   {
-    label: "QA for AI Products",
+    label: "AI Reliability Engineering",
     description:
-      "Testing and reliability support for AI products, including workflow validation, prompt/output checks, regression coverage, observability, and tools like LangSmith where useful.",
+      "Make AI systems more dependable through workflow validation, output evaluation, regression coverage, observability, and practical failure analysis.",
   },
   {
     label: "Hire QA Talent",
+    comingSoon: true,
     description:
       "We're building a small network of thoughtful QA, SDET, automation, reliability, and exploratory testing professionals across experience levels. If you need quality-minded people for a team, release, audit, or longer-term role, we can help find the right fit.",
   },
@@ -120,7 +122,7 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
       open={open}
       onClose={onClose}
       eyebrow="Our Services"
-      title="What needs testing? (Coming Soon)"
+      title="How can we give your team time back?"
       titleId="contact-modal-title"
       maxWidth="max-w-3xl"
     >
@@ -147,8 +149,13 @@ export default function ContactModal({ open, onClose }: ContactModalProps) {
                           : "border-zinc-800 bg-black/20 text-zinc-400 hover:border-zinc-600 hover:text-zinc-200"
                       }`}
                     >
-                      <span className="block text-xs uppercase tracking-[0.24em]">
-                        {service.label}
+                      <span className="flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.24em]">
+                        <span>{service.label}</span>
+                        {service.comingSoon && (
+                          <span className="border border-zinc-700 px-2 py-1 text-[0.6rem] tracking-[0.18em] text-zinc-500">
+                            Coming soon
+                          </span>
+                        )}
                       </span>
                       <span className="mt-3 block text-sm leading-6 normal-case tracking-normal">
                         {service.description}

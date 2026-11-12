@@ -1,7 +1,6 @@
 "use client";
 
-import { Hourglass } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import * as THREE from "three";
 
 type ThreeHourglassProps = {
@@ -39,7 +38,6 @@ function createSandCloud(
 export default function ThreeHourglass({ flipSignal }: ThreeHourglassProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const flipSignalRef = useRef(flipSignal);
-  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     flipSignalRef.current = flipSignal;
@@ -248,7 +246,6 @@ export default function ThreeHourglass({ flipSignal }: ThreeHourglassProps) {
       animationFrame = window.requestAnimationFrame(render);
     };
 
-    setReady(true);
     render();
 
     return () => {
@@ -277,13 +274,6 @@ export default function ThreeHourglass({ flipSignal }: ThreeHourglassProps) {
       role="img"
       className="relative h-64 w-64 touch-none overflow-hidden sm:h-72 sm:w-72"
     >
-      <div
-        className={`pointer-events-none absolute inset-0 flex items-center justify-center transition-opacity duration-700 ${
-          ready ? "opacity-0" : "opacity-100"
-        }`}
-      >
-        <Hourglass strokeWidth={1} className="h-52 w-52 text-zinc-300" />
-      </div>
     </div>
   );
 }
